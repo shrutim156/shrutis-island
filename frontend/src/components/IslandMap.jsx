@@ -1,12 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { mapLocations } from '../data/mapLocations';
+import { motion } from 'framer-motion';
+
+// हे सगळे IslandMap च्या सोबत एकाच 'components' फोल्डरमध्ये आहेत म्हणून ./ वापरले आहे
 import LocationModal from './LocationModal';
 import MapControls from './MapControls';
 import ExploreMenu from './ExploreMenu';
-import { Sparkles, Ship, Radio, Landmark, Anchor, FlaskConical, GraduationCap, Castle } from 'lucide-react';
+import ExplorerCharacter from './ExplorerCharacter';
 
+// Lucide icons
+import { Sparkles, Ship, Radio, Landmark, Anchor, FlaskConical, GraduationCap, Castle } from 'lucide-react';
 const MAP_IMAGE_URL = "/map-artwork.png";
+
+const mapLocations = [
+  { id: "palace", name: "Palace", subtitle: "About Me", x: 27.5, y: 41.5, width: "12%", height: "8%" },
+  { id: "academy", name: "Academy", subtitle: "Education", x: 57.8, y: 33.5, width: "12%", height: "8%" },
+  { id: "research", name: "Research Lab", subtitle: "AI • Data Science • CS", x: 73.5, y: 45.5, width: "13%", height: "8%" },
+  { id: "harbor", name: "Project Harbor", subtitle: "My Projects", x: 35.5, y: 75.0, width: "14%", height: "8%" },
+  { id: "museum", name: "Museum", subtitle: "Certifications & Achievements", x: 60.0, y: 72.0, width: "14%", height: "8%" },
+  { id: "satellite", name: "Satellite Station", subtitle: "Contact & Links", x: 92.0, y: 57.0, width: "12%", height: "8%" }
+];
 
 const locationIcons = {
   palace: Castle,
@@ -20,7 +32,6 @@ const locationIcons = {
 export default function IslandMap() {
   const [zoom, setZoom] = useState(1);
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [characterState, setCharacterState] = useState("idle");
   const [speechText, setSpeechText] = useState("Tap any location! ♡");
   const canvasRef = useRef(null);
 
@@ -28,7 +39,6 @@ export default function IslandMap() {
   const handleZoomOut = () => setZoom((prev) => Math.max(prev - 0.3, 0.7));
   const handleReset = () => setZoom(1);
 
-  // Dynamic Ocean Sparkles & Birds Animation Loop
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -114,18 +124,21 @@ export default function IslandMap() {
     ];
     const nextQuote = quotes[Math.floor(Math.random() * quotes.length)];
     setSpeechText(nextQuote);
-    setCharacterState("talking");
-    setTimeout(() => setCharacterState("idle"), 4000);
+  };
+
+  const handleSelectLocation = (loc) => {
+    setSelectedLocation(loc);
+    if (loc) {
+      setSpeechText(`Exploring ${loc.name}! ✨`);
+    }
   };
 
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-[#dcc4a4] select-none touch-none">
-      {/* Top Right Quick Navigation Menu */}
       <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30">
-        <ExploreMenu onSelectLocation={(loc) => setSelectedLocation(loc)} />
+        <ExploreMenu onSelectLocation={handleSelectLocation} />
       </div>
 
-      {/* Touch & Drag Canvas */}
       <motion.div
         drag
         dragConstraints={{ left: -800, right: 800, top: -600, bottom: 600 }}
@@ -138,7 +151,6 @@ export default function IslandMap() {
           className="relative w-full h-full max-w-[1920px] max-h-[1080px] flex items-center justify-center"
         >
           <div className="relative w-auto h-full max-h-[100vh] aspect-[16/9] flex items-center justify-center">
-            {/* Map Artwork */}
             <img
               src={MAP_IMAGE_URL}
               alt="Shruti's Island Interactive Map"
@@ -146,13 +158,11 @@ export default function IslandMap() {
               draggable={false}
             />
 
-            {/* Canvas overlay for sea sparkles & birds */}
             <canvas
               ref={canvasRef}
               className="absolute inset-0 pointer-events-none z-10 w-full h-full"
             />
 
-            {/* Floating Ship */}
             <motion.div
               animate={{
                 x: [-10, 10, -10],
@@ -165,7 +175,6 @@ export default function IslandMap() {
               <Ship className="w-5 h-5 sm:w-8 sm:h-8 drop-shadow-md" />
             </motion.div>
 
-            {/* Mobile Responsive Pins */}
             {mapLocations.map((loc) => {
               const IconComp = locationIcons[loc.id] || Sparkles;
               return (
@@ -173,7 +182,7 @@ export default function IslandMap() {
                   key={loc.id}
                   style={{ left: `${loc.x}%`, top: `${loc.y}%` }}
                   className="absolute -translate-x-1/2 -translate-y-1/2 z-20 cursor-pointer group"
-                  onClick={() => setSelectedLocation(loc)}
+                  onClick={() => handleSelectLocation(loc)}
                 >
                   <motion.div
                     animate={{ scale: [1, 1.25, 1], opacity: [0.4, 0.8, 0.4] }}
@@ -205,45 +214,13 @@ export default function IslandMap() {
         </motion.div>
       </motion.div>
 
-      {/* Explorer Character (Bottom Left) */}
-      <div className="absolute bottom-3 left-3 sm:bottom-6 sm:left-6 z-30 pointer-events-auto flex items-end gap-2 sm:gap-3">
-        <div className="relative flex items-center">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={speechText}
-              initial={{ opacity: 0, scale: 0.8, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              className="bg-[#f5efeb] text-[#2c1d0e] border sm:border-2 border-[#b88d4b] px-2.5 py-1 sm:px-4 sm:py-2 rounded-xl sm:rounded-2xl shadow-xl max-w-[140px] sm:max-w-xs font-handwriting text-xs sm:text-lg font-bold relative mr-1.5 sm:mr-2"
-            >
-              {speechText}
-              <div className="absolute -right-1.5 bottom-3 sm:bottom-4 w-0 h-0 border-t-[4px] sm:border-t-[6px] border-t-transparent border-b-[4px] sm:border-b-[6px] border-b-transparent border-l-[6px] sm:border-l-[8px] border-l-[#b88d4b]" />
-            </motion.div>
-          </AnimatePresence>
-
-          <motion.button
-            onClick={handleCharacterClick}
-            animate={{
-              y: [0, -4, 0],
-              rotate: characterState === "talking" ? [0, 5, -5, 0] : 0
-            }}
-            transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-            whileHover={{ scale: 1.1 }}
-            className="w-11 h-11 sm:w-16 sm:h-16 rounded-full bg-[#ebdcb9] border-2 sm:border-3 border-[#2c1d0e] shadow-xl flex items-center justify-center text-xl sm:text-3xl relative cursor-pointer"
-          >
-            <span>👩‍🌾</span>
-            <motion.span
-              animate={{ y: [0, -2, 0] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-              className="absolute -bottom-1 -right-1 text-xs sm:text-base bg-[#f5efeb] rounded-full p-0.5 border border-[#2c1d0e]"
-            >
-              🐱
-            </motion.span>
-          </motion.button>
-        </div>
+      <div className="absolute bottom-3 left-3 sm:bottom-6 sm:left-6 z-30 pointer-events-auto">
+        <ExplorerCharacter
+          speechText={speechText}
+          onCharacterClick={handleCharacterClick}
+        />
       </div>
 
-      {/* Zoom Controls (Bottom Right) */}
       <div className="absolute bottom-3 right-3 sm:bottom-6 sm:right-6 z-30 pointer-events-auto">
         <MapControls
           onZoomIn={handleZoomIn}
@@ -252,7 +229,6 @@ export default function IslandMap() {
         />
       </div>
 
-      {/* Destination Modal View */}
       <LocationModal
         location={selectedLocation}
         onClose={() => setSelectedLocation(null)}
