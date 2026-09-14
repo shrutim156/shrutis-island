@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  h1, h2, h3, .font-serif-title {
+    font-family: 'Cinzel', serif;
+  }
+  .font-handwriting {
+    font-family: 'Caveat', cursive;
+  }
+}
+
+/* Custom Scrollbar for Parchment Theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #e8d8c3;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: #a37d57;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7a5a3a;
+}
