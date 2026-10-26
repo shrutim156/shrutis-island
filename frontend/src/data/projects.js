@@ -1,43 +1,44 @@
-// EASILY EDIT OR ADD YOUR REAL PROJECTS HERE
 export const projects = [
   {
-    id: "harbor-project-1",
-    title: "AI Project Vessel #1",
-    subtitle: "Interactive Intelligent Application",
-    type: "Harbor Flagship",
-    status: "In Active Development",
-    description: "An AI-driven project built to showcase practical implementation of Machine Learning / Data Science concepts.",
-    problem: "Data processing and real-time inference required an accessible, intuitive UI layer paired with automated pipelines.",
-    solution: "Designed an automated model pipeline integrated with a responsive web front end.",
-    technologies: ["Python", "Machine Learning", "React", "Tailwind CSS"],
-    features: [
-      "Interactive data input interface",
-      "Real-time prediction visualization",
-      "Clean modular code design"
-    ],
-    learning: "Hands-on experience in connecting model outputs with modern frontend interface states.",
-    github: "https://github.com/ShrutiMore",
-    liveDemo: "#",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
+    id: "crop-recommendation",
+    title: "Crop Recommendation & Price Prediction System",
+    subtitle: "AI-Powered Agriculture Insights",
+    type: "Machine Learning",
+    status: "Deployed",
+    description: "An intelligent machine learning web application that recommends optimal crops and predicts market prices based on soil composition, weather parameters, and environmental factors.",
+    problem: "Farmers often face challenges in deciding the most suitable crop to cultivate and predicting market prices for optimal profit margins.",
+    solution: "Built a Streamlit web interface backed by ML models trained on agricultural and soil parameters to provide real-time recommendations.",
+    keyConcepts: ["Supervised Learning", "Recommendation System", "Agricultural Analytics", "Price Prediction"],
+    technologies: ["Python", "Streamlit", "Scikit-Learn", "Pandas", "NumPy"],
+    github: "https://github.com/shrutim156/crop-recommendation-system",
+    liveDemo: "https://crop-recommendation-system-ywplvnjevukvncjyrntdup.streamlit.app/"
   },
   {
-    id: "harbor-project-2",
-    title: "Data Science Vessel #2",
-    subtitle: "Analytics & Insights Explorer",
-    type: "Dock Exploration",
-    status: "Completed Prototype",
-    description: "Exploratory analysis and data visualization project focusing on structured dataset trends.",
-    problem: "Extracting actionable insights from unorganized raw analytical datasets.",
-    solution: "Built clean data pipelines, automated cleansing scripts, and generated statistical dashboards.",
-    technologies: ["Python", "Pandas", "Matplotlib", "SQL"],
-    features: [
-      "Automated data cleaning routines",
-      "Statistical distribution analysis",
-      "Clear visual charts"
-    ],
-    learning: "Reinforced deep understanding of SQL queries and statistical data representation.",
-    github: "https://github.com/ShrutiMore",
-    liveDemo: "#",
-    image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=800&q=80"
+    id: "customer-churn",
+    title: "Customer Churn Prediction",
+    subtitle: "Predictive Analytics for Customer Retention",
+    type: "Predictive Analytics",
+    status: "Deployed",
+    description: "A machine learning application designed to identify customers who are likely to churn, helping businesses proactively retain customers.",
+    problem: "Customer attrition impacts revenue, making early detection of churn signals critical for targeted retention strategies.",
+    solution: "Trained classification models to analyze customer behavior and key metrics, deployed with a web frontend on Render.",
+    keyConcepts: ["Classification", "Churn Analysis", "Model Evaluation", "Web API"],
+    technologies: ["Python", "Machine Learning", "Scikit-Learn", "Flask", "Render"],
+    github: "https://github.com/shrutim156/customer-churn-prediction",
+    liveDemo: "https://customer-churn-prediction-pyyv.onrender.com/"
+  },
+  {
+    id: "used-car-price",
+    title: "Used Car Price Prediction",
+    subtitle: "Automobile Valuation Web App",
+    type: "Web Application",
+    status: "Deployed",
+    description: "A predictive web tool that accurately estimates the market resale price of used cars based on mileage, age, brand, fuel type, and condition.",
+    problem: "Determining fair resale values for pre-owned vehicles can be difficult due to varying market parameters.",
+    solution: "Developed regression models trained on historical vehicle sales data to estimate accurate prices instantaneously.",
+    keyConcepts: ["Regression", "Feature Engineering", "Data Preprocessing", "Web Deployment"],
+    technologies: ["Python", "Regression", "Scikit-Learn", "Flask", "Render"],
+    github: "https://github.com/shrutim156/Used_Car_Price_Prediction",
+    liveDemo: "https://used-car-price-prediction-abbo.onrender.com/"
   }
 ];
