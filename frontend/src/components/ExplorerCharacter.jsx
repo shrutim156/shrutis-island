@@ -145,7 +145,7 @@ export default function ExplorerCharacter({ speechText, onCharacterClick }) {
 
   return (
     <div className="relative flex items-center gap-2 sm:gap-3 select-none pointer-events-auto">
-      {/* Interactive Chat Window */}
+      {/* Interactive Chat Window - Responsive Fixed Positioning for Mobile */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -153,11 +153,11 @@ export default function ExplorerCharacter({ speechText, onCharacterClick }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute bottom-20 left-0 w-80 sm:w-96 bg-[#f5efeb] text-[#2c1d0e] border-2 border-[#b88d4b] rounded-2xl shadow-2xl flex flex-col overflow-hidden font-serif z-50"
+            className="fixed bottom-4 left-4 right-4 sm:absolute sm:bottom-20 sm:left-0 sm:right-auto sm:w-96 max-h-[75vh] bg-[#f5efeb] text-[#2c1d0e] border-2 border-[#b88d4b] rounded-2xl shadow-2xl flex flex-col overflow-hidden font-serif z-50"
           >
             {/* Header */}
             <div className="bg-[#ebdcb9] px-4 py-3 border-b-2 border-[#b88d4b] flex justify-between items-center font-bold">
-              <span className="flex items-center gap-2">🐻 Shruti's Island AI Guide</span>
+              <span className="flex items-center gap-2 text-sm sm:text-base">🐻 Shruti's Island AI Guide</span>
               <button
                 onClick={() => setIsOpen(false)}
                 className="text-[#2c1d0e] hover:text-red-700 font-bold px-2 py-0.5 rounded transition-colors"
@@ -168,7 +168,7 @@ export default function ExplorerCharacter({ speechText, onCharacterClick }) {
             </div>
 
             {/* Message Display Area */}
-            <div className="p-3 h-72 overflow-y-auto flex flex-col gap-2.5 text-xs sm:text-sm">
+            <div className="p-3 flex-1 overflow-y-auto flex flex-col gap-2.5 text-xs sm:text-sm max-h-[50vh]">
               {messages.map((msg, idx) => (
                 <div
                   key={idx}
@@ -195,7 +195,7 @@ export default function ExplorerCharacter({ speechText, onCharacterClick }) {
               />
               <button
                 type="submit"
-                className="bg-[#b88d4b] text-white px-4 py-1.5 rounded-xl text-xs sm:text-sm font-bold hover:bg-[#a0773f] transition-colors"
+                className="bg-[#b88d4b] text-white px-3 sm:px-4 py-1.5 rounded-xl text-xs sm:text-sm font-bold hover:bg-[#a0773f] transition-colors"
               >
                 Send
               </button>
