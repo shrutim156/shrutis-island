@@ -145,19 +145,19 @@ export default function ExplorerCharacter({ speechText, onCharacterClick }) {
 
   return (
     <div className="relative flex items-center gap-2 sm:gap-3 select-none pointer-events-auto">
-      {/* Interactive Chat Window - Responsive Fixed Positioning for Mobile */}
+      {/* Interactive Chat Window - Safely anchored above the cliff character */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            initial={{ opacity: 0, y: 15, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            exit={{ opacity: 0, y: 15, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-4 left-4 right-4 sm:absolute sm:bottom-20 sm:left-0 sm:right-auto sm:w-96 max-h-[75vh] bg-[#f5efeb] text-[#2c1d0e] border-2 border-[#b88d4b] rounded-2xl shadow-2xl flex flex-col overflow-hidden font-serif z-50"
+            className="absolute bottom-24 left-0 w-72 sm:w-96 max-h-[65vh] bg-[#f5efeb] text-[#2c1d0e] border-2 border-[#b88d4b] rounded-2xl shadow-2xl flex flex-col overflow-hidden font-serif z-50"
           >
             {/* Header */}
-            <div className="bg-[#ebdcb9] px-4 py-3 border-b-2 border-[#b88d4b] flex justify-between items-center font-bold">
-              <span className="flex items-center gap-2 text-sm sm:text-base">🐻 Shruti's Island AI Guide</span>
+            <div className="bg-[#ebdcb9] px-4 py-2.5 border-b-2 border-[#b88d4b] flex justify-between items-center font-bold">
+              <span className="flex items-center gap-2 text-xs sm:text-sm">🐻 Shruti's Island AI Guide</span>
               <button
                 onClick={() => setIsOpen(false)}
                 className="text-[#2c1d0e] hover:text-red-700 font-bold px-2 py-0.5 rounded transition-colors"
@@ -168,7 +168,7 @@ export default function ExplorerCharacter({ speechText, onCharacterClick }) {
             </div>
 
             {/* Message Display Area */}
-            <div className="p-3 flex-1 overflow-y-auto flex flex-col gap-2.5 text-xs sm:text-sm max-h-[50vh]">
+            <div className="p-3 flex-1 overflow-y-auto flex flex-col gap-2.5 text-xs sm:text-sm max-h-[45vh]">
               {messages.map((msg, idx) => (
                 <div
                   key={idx}
@@ -190,12 +190,12 @@ export default function ExplorerCharacter({ speechText, onCharacterClick }) {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask 'introduce yourself', projects, etc..."
+                placeholder="Ask about projects, background..."
                 className="flex-1 bg-[#f5efeb] border border-[#b88d4b] rounded-xl px-3 py-1.5 text-xs sm:text-sm text-[#2c1d0e] focus:outline-none focus:ring-1 focus:ring-[#b88d4b]"
               />
               <button
                 type="submit"
-                className="bg-[#b88d4b] text-white px-3 sm:px-4 py-1.5 rounded-xl text-xs sm:text-sm font-bold hover:bg-[#a0773f] transition-colors"
+                className="bg-[#b88d4b] text-white px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold hover:bg-[#a0773f] transition-colors"
               >
                 Send
               </button>
@@ -214,7 +214,7 @@ export default function ExplorerCharacter({ speechText, onCharacterClick }) {
             exit={{ opacity: 0, y: -5, scale: 0.95 }}
             transition={{ duration: 0.3 }}
             onClick={handleClick}
-            className="cursor-pointer relative bg-[#f5efeb] text-[#2c1d0e] px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-2xl border-1.5 sm:border-2 border-[#b88d4b] shadow-xl max-w-[150px] sm:max-w-xs font-serif text-xs sm:text-sm font-bold"
+            className="cursor-pointer relative bg-[#f5efeb] text-[#2c1d0e] px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-2xl border-1.5 sm:border-2 border-[#b88d4b] shadow-xl max-w-[130px] sm:max-w-xs font-serif text-xs sm:text-sm font-bold"
           >
             {speechText}
             <div className="absolute right-[-7px] sm:right-[-8px] bottom-3 sm:bottom-4 w-0 h-0 border-t-[5px] sm:border-t-[6px] border-t-transparent border-b-[5px] sm:border-b-[6px] border-b-transparent border-l-[7px] sm:border-l-[8px] border-l-[#b88d4b]" />
@@ -222,14 +222,14 @@ export default function ExplorerCharacter({ speechText, onCharacterClick }) {
         </AnimatePresence>
       )}
 
-      {/* Floating Bear Emoji */}
+      {/* Floating Bear Emoji / Character Trigger */}
       <motion.div
         animate={{ y: [0, -6, 0] }}
         transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
         whileHover={{ scale: 1.2 }}
         whileTap={{ scale: 0.9 }}
         onClick={handleClick}
-        className="cursor-pointer text-4xl sm:text-5xl filter drop-shadow-md"
+        className="cursor-pointer text-3xl sm:text-5xl filter drop-shadow-md"
         title="Tap to talk with Shruti's Assistant!"
       >
         🐻
