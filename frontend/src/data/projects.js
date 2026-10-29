@@ -40,5 +40,19 @@ export const projects = [
     technologies: ["Python", "Regression", "Scikit-Learn", "Flask", "Render"],
     github: "https://github.com/shrutim156/Used_Car_Price_Prediction",
     liveDemo: "https://used-car-price-prediction-abbo.onrender.com/"
-  }
+  },
+  {
+  id: 'ai-interview-questions-generator',
+  type: 'AI / Web App',
+  title: 'AI Interview Questions Generator',
+  subtitle: 'Automated Interview Preparation Tool',
+  status: 'Deployed',
+  description: 'An AI-powered application designed to generate tailored interview questions and answer guidance based on job roles, tech stacks, and difficulty levels.',
+  problem: 'Preparing for interviews often involves manually searching for relevant questions, which can be repetitive, unorganized, and poorly tailored to specific job requirements.',
+  solution: 'Leveraged generative AI to create customized, role-specific interview question sets with detailed explanations to streamline technical interview prep.',
+  keyConcepts: [ 'Prompt Engineering', 'API Integration', 'Automated Evaluation'],
+  technologies: ['Python', 'FastApi', 'Gemini API', 'Render'], // Adjust specs according to your exact stack
+  github: 'https://github.com/shrutim156/ai-interview-questions-generator',
+  liveDemo: 'https://ai-interview-questions-generator-hidj.onrender.com/'
+}
 ];
